@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Checkout - Aloba Books" description="Secure checkout">
+  <Navigation />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-24 bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl lg:text-6xl font-bold text-white mb-6">Checkout</h1>
+      </div>
+    </section>
+    
+    <!-- Checkout Content -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="checkout-content"></div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  import React from 'react';
+  import { createRoot } from 'react-dom/client';
+  import { CartProvider } from '../components/CartContext.tsx';
+  import CheckoutPage from '../components/CheckoutPage.tsx';
+
+  // Mount React checkout component
+  const checkoutContainer = document.getElementById('checkout-content');
+  if (checkoutContainer) {
+    const root = createRoot(checkoutContainer);
+    root.render(
+      React.createElement(CartProvider, null,
+        React.createElement(CheckoutPage)
+      )
+    );
+  }
+</script>
+

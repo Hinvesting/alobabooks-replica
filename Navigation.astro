@@ -1,0 +1,76 @@
+---
+// Navigation component for the header
+---
+
+<nav class="bg-teal-600/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="/" class="flex items-center">
+          <img src="/logo.png" alt="Aloba Books" class="h-10 w-auto" />
+        </a>
+      </div>
+      
+      <!-- Navigation Links -->
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-4">
+          <a href="/" class="text-white hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            Home
+          </a>
+          <a href="/about-us" class="text-white hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            About Us
+          </a>
+          <a href="/shop" class="text-white hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            Shop
+          </a>
+          <a href="/product-category/audio-books" class="text-white hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            Audio Books
+          </a>
+          <a href="/musics" class="text-white hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            Musics
+          </a>
+          <a href="/blog" class="text-white hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            Blog
+          </a>
+          <a href="/contact" class="text-white hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            Contact
+          </a>
+        </div>
+      </div>
+      
+      <!-- Cart -->
+      <div class="flex items-center">
+        <div id="cart-dropdown"></div>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button type="button" class="text-white hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+          <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  import { CartProvider } from './CartContext.tsx';
+  import CartDropdown from './CartDropdown.tsx';
+  import React from 'react';
+  import { createRoot } from 'react-dom/client';
+
+  // Mount React cart component
+  const cartContainer = document.getElementById('cart-dropdown');
+  if (cartContainer) {
+    const root = createRoot(cartContainer);
+    root.render(
+      React.createElement(CartProvider, null,
+        React.createElement(CartDropdown)
+      )
+    );
+  }
+</script>
+

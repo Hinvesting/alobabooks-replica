@@ -1,0 +1,240 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+// Mock product data - will be replaced with Strapi data later
+const products = [
+  {
+    id: 1,
+    title: "Family Affairs",
+    author: "Wright Aloba",
+    price: 24.99,
+    image: "/placeholder-book-1.jpg",
+    category: "Fiction",
+    teaser: "With Teaser",
+    type: "book"
+  },
+  {
+    id: 2,
+    title: "Hold Your Judgment",
+    author: "Wright Aloba", 
+    price: 19.99,
+    image: "/placeholder-book-2.jpg",
+    category: "Fiction",
+    teaser: "With Teaser",
+    type: "book"
+  },
+  {
+    id: 3,
+    title: "Ways to Become a Middle Class",
+    author: "Wright Aloba",
+    price: 22.99,
+    image: "/placeholder-book-3.jpg",
+    category: "Self-Help",
+    type: "book"
+  },
+  {
+    id: 4,
+    title: "52% Financial Literacy",
+    author: "Wright Aloba",
+    price: 18.99,
+    image: "/placeholder-book-4.jpg",
+    category: "Finance",
+    type: "book"
+  }
+];
+---
+
+<Layout title="Shop - Aloba Books" description="Browse our collection of books and audiobooks">
+  <Navigation />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-24 bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl lg:text-6xl font-bold text-white mb-6">SHOP</h1>
+      </div>
+    </section>
+    
+    <!-- Adult Readers Notice -->
+    <section class="py-16 bg-teal-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">For Adult Readers Only</h2>
+        <p class="text-xl text-teal-100 max-w-3xl mx-auto">
+          Explore stories crafted with mature themes of love, passion, and adventure, 
+          designed exclusively for a discerning adult audience.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Products Grid -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {products.map((product) => (
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <!-- Product Image -->
+              <div class="relative aspect-[3/4] bg-gray-200">
+                {product.teaser && (
+                  <div class="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+                    {product.teaser}
+                  </div>
+                )}
+                <img 
+                  src={product.image} 
+                  alt={product.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
+                  {product.title}
+                </h3>
+                <p class="text-sm text-gray-600 mb-2">by {product.author}</p>
+                <p class="text-sm text-teal-600 font-medium mb-4">{product.category}</p>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-xl font-bold text-gray-900">
+                    ${product.price}
+                  </span>
+                  <div class={`add-to-cart-${product.id}`}></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <!-- Load More Button -->
+        <div class="text-center mt-12">
+          <button class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+            Load More Products
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Browse by Category -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Browse by Category</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <a href="/product-category/fiction" class="group">
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+              <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Fiction</h3>
+            </div>
+          </a>
+          
+          <a href="/product-category/self-help" class="group">
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Self-Help</h3>
+            </div>
+          </a>
+          
+          <a href="/product-category/finance" class="group">
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Finance</h3>
+            </div>
+          </a>
+          
+          <a href="/product-category/audio-books" class="group">
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+              <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-200 transition-colors">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M9 12a3 3 0 106 0 3 3 0 00-6 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Audio Books</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  import React from 'react';
+  import { createRoot } from 'react-dom/client';
+  import { CartProvider } from '../components/CartContext.tsx';
+  import AddToCartButton from '../components/AddToCartButton.tsx';
+
+  // Product data for React components
+  const products = [
+    {
+      id: 1,
+      title: "Family Affairs",
+      price: 24.99,
+      image: "/placeholder-book-1.jpg",
+      type: "book" as const
+    },
+    {
+      id: 2,
+      title: "Hold Your Judgment",
+      price: 19.99,
+      image: "/placeholder-book-2.jpg",
+      type: "book" as const
+    },
+    {
+      id: 3,
+      title: "Ways to Become a Middle Class",
+      price: 22.99,
+      image: "/placeholder-book-3.jpg",
+      type: "book" as const
+    },
+    {
+      id: 4,
+      title: "52% Financial Literacy",
+      price: 18.99,
+      image: "/placeholder-book-4.jpg",
+      type: "book" as const
+    }
+  ];
+
+  // Mount Add to Cart buttons for each product
+  products.forEach(product => {
+    const container = document.querySelector(`.add-to-cart-${product.id}`);
+    if (container) {
+      const root = createRoot(container);
+      root.render(
+        React.createElement(CartProvider, null,
+          React.createElement(AddToCartButton, {
+            product: product,
+            className: "text-sm px-3 py-2"
+          })
+        )
+      );
+    }
+  });
+</script>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
