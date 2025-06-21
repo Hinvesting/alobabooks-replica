@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@astrojs/react": "^4.3.0",
     "astro": "^5.10.0"
   }
 }
